@@ -1,0 +1,16 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WikiScraper", "WikiScraper.csproj", "{90254065-394F-4095-B27B-5C95A49AFBEC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{90254065-394F-4095-B27B-5C95A49AFBEC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{90254065-394F-4095-B27B-5C95A49AFBEC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{90254065-394F-4095-B27B-5C95A49AFBEC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{90254065-394F-4095-B27B-5C95A49AFBEC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
