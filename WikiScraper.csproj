@@ -64,7 +64,6 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="scraperagent\Class1.cs" />
     <EmbeddedResource Include="ScraperAgentGUI.resx">
       <DependentUpon>ScraperAgentGUI.cs</DependentUpon>
     </EmbeddedResource>
@@ -93,6 +92,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="models\" />
+    <Folder Include="scraperagent" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

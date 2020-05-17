@@ -22,10 +22,9 @@ namespace WikiScraper
         public void Prepare()
         {
             ts = new CancellationTokenSource();
-
             try
             {
-                int crawlers = 2;
+                int crawlers = 1;
                 if (crawlers == 0)
                 {
                     throw new Exception();
@@ -55,7 +54,6 @@ namespace WikiScraper
 
 
             this.webBrowser1.Navigate("https://en.m.wikipedia.org/wiki/Christopher_Columbus");
-
 
         }
 

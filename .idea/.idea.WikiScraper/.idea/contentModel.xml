@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
     <e p="C:\Users\alex\.Rider2019.2\config\scratches" t="IncludeRecursive" />
@@ -7,11 +7,11 @@
     <e p="C:\Users\alex\RiderProjects\WikiScraper" t="IncludeRecursive">
       <e p="App.config" t="Include" />
       <e p="bin" t="ExcludeRecursive" />
-      <e p="Form1.cs" t="Include" />
-      <e p="Form1.Designer.cs" t="Include" />
-      <e p="Form1.resx" t="Include" />
+      <e p="Crawler.cs" t="Include" />
+      <e p="models" t="Include" />
       <e p="obj" t="ExcludeRecursive" />
       <e p="packages" t="ExcludeRecursive" />
+      <e p="packages.config" t="Include" />
       <e p="Program.cs" t="Include" />
       <e p="Properties" t="Include">
         <e p="AssemblyInfo.cs" t="Include" />
@@ -20,6 +20,10 @@
         <e p="Settings.Designer.cs" t="Include" />
         <e p="Settings.settings" t="Include" />
       </e>
+      <e p="scraperagent" t="Include" />
+      <e p="ScraperAgentGUI.cs" t="Include" />
+      <e p="ScraperAgentGUI.Designer.cs" t="Include" />
+      <e p="ScraperAgentGUI.resx" t="Include" />
       <e p="WikiScraper.csproj" t="IncludeRecursive" />
       <e p="WikiScraper.sln" t="IncludeFlat" />
     </e>

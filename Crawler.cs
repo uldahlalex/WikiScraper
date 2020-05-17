@@ -12,7 +12,6 @@ namespace WikiScraper
 {
     class Crawler
     {
-
         private Boolean cont;
 
         public void Start(CancellationToken token, String searchTerm)
@@ -33,16 +32,32 @@ namespace WikiScraper
                 {
                     "\r\n"
                 }, StringSplitOptions.RemoveEmptyEntries);
-                var text = string.Join("\r\n", sentences.Select(s => r.Replace(s, " ").Trim()));
+                string text = string.Join("\r\n", sentences.Select(s => r.Replace(s, " ").Trim()));
                 Console.WriteLine(text);
 
+                //Brug dictionary til at lagre alle ordene - mest effektive runtime, og det er mest hensigtsmæssigt
+                //at bruge en datastruktur som har unikke "keys" og values der stiger efter frekvens.
+                //Dette burde egentlig også bruges i datagen projektet til at lave frekvenslisten
 
                 //cancellation of while loop
                 cont = false;
-
+                var dict = this.frequencies(text);
+                foreach (var item in dict)
+                {
+                    Console.WriteLine(item.Key);
+                    Console.WriteLine(item.Value);
+                }
+                
             }
-
         }
 
+        private Dictionary<string, int> frequencies(string text)
+        {
+            Dictionary<string, int> count =
+                text.Split(' ')
+                    .GroupBy(s => s)
+                    .ToDictionary(g => g.Key, g => g.Count());
+            return count;
+        }
     }
 }
