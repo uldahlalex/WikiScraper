@@ -14,12 +14,11 @@ namespace WikiScraper
     {
         private Boolean cont;
 
-        public void Start(CancellationToken token, String searchTerm)
+        public Dictionary<string, int> Start(CancellationToken token, String searchTerm)
         {
             cont = true;
 
-            while (cont)
-            {
+
                 UriBuilder ub = new UriBuilder(searchTerm);
 
 
@@ -35,20 +34,17 @@ namespace WikiScraper
                 string text = string.Join("\r\n", sentences.Select(s => r.Replace(s, " ").Trim()));
                 Console.WriteLine(text);
 
-                //Brug dictionary til at lagre alle ordene - mest effektive runtime, og det er mest hensigtsmæssigt
-                //at bruge en datastruktur som har unikke "keys" og values der stiger efter frekvens.
-                //Dette burde egentlig også bruges i datagen projektet til at lave frekvenslisten
-
-                //cancellation of while loop
-                cont = false;
+                
                 var dict = this.frequencies(text);
                 foreach (var item in dict)
                 {
                     Console.WriteLine(item.Key);
                     Console.WriteLine(item.Value);
                 }
+                return dict;
+
                 
-            }
+            
         }
 
         private Dictionary<string, int> frequencies(string text)
@@ -57,7 +53,8 @@ namespace WikiScraper
                 text.Split(' ')
                     .GroupBy(s => s)
                     .ToDictionary(g => g.Key, g => g.Count());
-            return count;
+            var items = from item in count orderby item.Value descending select item;
+            return items.ToDictionary(pair => pair.Key, pair => pair.Value);
         }
     }
 }

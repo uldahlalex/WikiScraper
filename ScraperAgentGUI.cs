@@ -19,6 +19,7 @@ namespace WikiScraper
         Crawler crawler;
         CancellationTokenSource ts;
 
+
         public void Prepare()
         {
             ts = new CancellationTokenSource();
@@ -35,9 +36,23 @@ namespace WikiScraper
                     var crawler = new Crawler();
 
                     Task t = Task.Run(() =>
-                    {
-                        crawler.Start(ts.Token, this.textBox1.Text);
-                    });
+                    { 
+                        Dictionary<string, int> dict = crawler.Start(ts.Token, this.textBox1.Text);
+                        MethodInvoker update = delegate
+                        {
+                           
+                            foreach (var item in dict)
+                            {
+                                listView1.Items.Add(item + "");
+                            }
+
+
+
+
+                        };
+                        listView1.BeginInvoke(update);
+                    }
+                        );
                 }
 
             }
