@@ -31,9 +31,9 @@
     /// </summary>
     private void InitializeComponent()
     {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -61,21 +61,23 @@
             this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.wikiScraperToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.theAuthorToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.richTextBox2 = new System.Windows.Forms.RichTextBox();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.miniToolStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.menuStrip2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.SuspendLayout();
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(97, 59);
+            this.textBox1.Location = new System.Drawing.Point(172, 27);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(312, 20);
             this.textBox1.TabIndex = 0;
@@ -85,7 +87,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(27, 62);
+            this.label1.Location = new System.Drawing.Point(108, 30);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(58, 13);
             this.label1.TabIndex = 1;
@@ -95,7 +97,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(27, 141);
+            this.label2.Location = new System.Drawing.Point(113, 67);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(53, 13);
             this.label2.TabIndex = 2;
@@ -104,7 +106,7 @@
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(97, 139);
+            this.numericUpDown1.Location = new System.Drawing.Point(172, 65);
             this.numericUpDown1.Name = "numericUpDown1";
             this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
             this.numericUpDown1.TabIndex = 3;
@@ -117,15 +119,15 @@
             // 
             // webBrowser1
             // 
-            this.webBrowser1.Location = new System.Drawing.Point(532, 59);
+            this.webBrowser1.Location = new System.Drawing.Point(532, 43);
             this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(540, 540);
+            this.webBrowser1.Size = new System.Drawing.Size(540, 556);
             this.webBrowser1.TabIndex = 4;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(529, 43);
+            this.label3.Location = new System.Drawing.Point(529, 27);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(91, 13);
             this.label3.TabIndex = 5;
@@ -207,26 +209,26 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(28, 274);
+            this.label4.Location = new System.Drawing.Point(12, 171);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(37, 13);
+            this.label4.Size = new System.Drawing.Size(145, 13);
             this.label4.TabIndex = 8;
-            this.label4.Text = "Result";
+            this.label4.Text = "All words sorted by frequency";
             this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // chart1
             // 
-            chartArea2.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chart1.Legends.Add(legend2);
-            this.chart1.Location = new System.Drawing.Point(31, 442);
+            chartArea3.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.chart1.Legends.Add(legend3);
+            this.chart1.Location = new System.Drawing.Point(9, 443);
             this.chart1.Name = "chart1";
-            series2.ChartArea = "ChartArea1";
-            series2.Legend = "Legend1";
-            series2.Name = "Series1";
-            this.chart1.Series.Add(series2);
-            this.chart1.Size = new System.Drawing.Size(495, 157);
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.chart1.Series.Add(series3);
+            this.chart1.Size = new System.Drawing.Size(517, 156);
             this.chart1.TabIndex = 9;
             this.chart1.Text = "chart1";
             // 
@@ -304,38 +306,9 @@
             this.theAuthorToolStripMenuItem1.Size = new System.Drawing.Size(136, 22);
             this.theAuthorToolStripMenuItem1.Text = "The author";
             // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(30, 254);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(312, 17);
-            this.checkBox1.TabIndex = 12;
-            this.checkBox1.Text = "Check for depth-first search, uncheck for breadth-first search";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-            // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(97, 99);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(312, 20);
-            this.textBox2.TabIndex = 13;
-            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged_1);
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 102);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(82, 13);
-            this.label5.TabIndex = 14;
-            this.label5.Text = "Use wiki search";
-            this.label5.Click += new System.EventHandler(this.label5_Click);
-            // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(31, 205);
+            this.button1.Location = new System.Drawing.Point(172, 139);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 15;
@@ -345,21 +318,64 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(30, 289);
+            this.richTextBox1.Location = new System.Drawing.Point(9, 186);
             this.richTextBox1.Margin = new System.Windows.Forms.Padding(2);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(240, 148);
+            this.richTextBox1.Size = new System.Drawing.Size(249, 238);
             this.richTextBox1.TabIndex = 16;
             this.richTextBox1.Text = "";
             // 
             // richTextBox2
             // 
-            this.richTextBox2.Location = new System.Drawing.Point(274, 289);
+            this.richTextBox2.Location = new System.Drawing.Point(275, 186);
             this.richTextBox2.Margin = new System.Windows.Forms.Padding(2);
             this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(252, 148);
+            this.richTextBox2.Size = new System.Drawing.Size(252, 238);
             this.richTextBox2.TabIndex = 17;
             this.richTextBox2.Text = "";
+            this.richTextBox2.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.openLink);
+            // 
+            // numericUpDown2
+            // 
+            this.numericUpDown2.Location = new System.Drawing.Point(172, 100);
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Size = new System.Drawing.Size(120, 20);
+            this.numericUpDown2.TabIndex = 18;
+            this.numericUpDown2.Value = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(6, 102);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(160, 13);
+            this.label6.TabIndex = 19;
+            this.label6.Text = "Number of CPU threads to utilize";
+            this.label6.Click += new System.EventHandler(this.label6_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(282, 171);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(239, 13);
+            this.label5.TabIndex = 20;
+            this.label5.Text = "URLs visited in chronological order. Click to open";
+            this.label5.Click += new System.EventHandler(this.label5_Click_1);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(12, 426);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(193, 13);
+            this.label7.TabIndex = 21;
+            this.label7.Text = "Visual chart representation of top words";
+            this.label7.Click += new System.EventHandler(this.label7_Click);
             // 
             // ScraperAgentGUI
             // 
@@ -368,12 +384,13 @@
             this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1084, 611);
+            this.Controls.Add(this.label7);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.numericUpDown2);
             this.Controls.Add(this.richTextBox2);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.chart1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -394,6 +411,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.menuStrip2.ResumeLayout(false);
             this.menuStrip2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -427,11 +445,12 @@
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem wikiScraperToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem theAuthorToolStripMenuItem1;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.RichTextBox richTextBox1;
         private System.Windows.Forms.RichTextBox richTextBox2;
+        private System.Windows.Forms.NumericUpDown numericUpDown2;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label7;
     }
 }

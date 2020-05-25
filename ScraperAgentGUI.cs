@@ -25,7 +25,7 @@ namespace WikiScraper
 
         public List<Link> links = new List<Link>();
 
-        public int iteration = 0;
+        public int iteration = 1;
 
         public string allText = "";
 
@@ -41,13 +41,15 @@ namespace WikiScraper
             links.Add(link);
 
             ts = new CancellationTokenSource();
-            foreach (Link l in links)
+            foreach (Link l in links) //pt registrerer den ikke den ever-forøgende mængde af links - den tager blot de som er til stede pt, og scraper disse. Det er derfor, at når man trykker "start" vil man begynde at scrape nye sider
             {
                 if (l.visited != true)
                 {
                     try
                     {
-                        int crawlers = 2;
+                        decimal threads = numericUpDown2.Value;
+                        int crawlers = (int)threads;
+
                         if (crawlers == 0)
                         {
                             throw new Exception();
@@ -59,7 +61,7 @@ namespace WikiScraper
 
                             Task t = Task.Run(() =>
                             {
-                                crawler.Start(ts.Token, l);
+                                crawler.Start(ts.Token, l, numericUpDown1.Value);
                             }
                                 );
                         }
@@ -100,10 +102,11 @@ namespace WikiScraper
         private void setGUI()
         {
             //start off by clearing the GUI and then setting it
+            richTextBox1.Clear();
             MethodInvoker update = delegate
             {
                 
-                foreach (var item in this.dict)
+                foreach (var item in dict)
                 {
                     richTextBox1.AppendText(item.Value + "     " + item.Key + "\n");
                 }
@@ -122,10 +125,10 @@ namespace WikiScraper
                 series.Points.DataBindXY(shortKeys, shortened);
                 chart1.Series.Add(series);
                 dict.Clear();*/
-
+                int num = 0;
                 foreach (Link l in links)
                 {
-                    richTextBox2.AppendText(l.URL + "\n");
+                    richTextBox2.AppendText(num++ +": "+l.URL + "\n\n");
                 }
                 
 
@@ -153,7 +156,6 @@ namespace WikiScraper
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             this.webBrowser1.Navigate(textBox1.Text);
-            textBox2.Clear();
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -229,6 +231,26 @@ namespace WikiScraper
         {
             
             this.Prepare();
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label7_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void openLink(object sender, LinkClickedEventArgs e)
+        {
+            this.webBrowser1.Navigate(e.LinkText);
         }
     }
 }

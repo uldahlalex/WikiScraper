@@ -23,9 +23,8 @@ namespace WikiScraper
             this.scraper = scraper;
         }
 
-        public void Start(CancellationToken token, Link link)
+        public void Start(CancellationToken token, Link link, decimal depth)
         {
-
 
             UriBuilder ub = new UriBuilder(link.URL);
 
@@ -35,10 +34,10 @@ namespace WikiScraper
 
             foreach (HtmlNode linkHere in doc.DocumentNode.SelectNodes("//a[@href]"))
             {
-                if (scraper.iteration < 5)
+                if (scraper.iteration < (int)depth)
                 {
                     HtmlAttribute att = linkHere.Attributes["href"];
-                    if ((att.Value.Contains("http://") || att.Value.Contains("https://")) && att.Value.Contains("wiki"))
+                    if ((att.Value.Contains("http://") || att.Value.Contains("https://")) && att.Value.Contains("wiki")) //evt lav kun dansk wiki
                     {
                         this.scraper.links.Add(new Link { URL = att.Value, Depth = 1, visited = false });
                         scraper.iteration++;
