@@ -49,7 +49,6 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.theCrawlerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.theAuthorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.listView1 = new System.Windows.Forms.ListView();
             this.label4 = new System.Windows.Forms.Label();
             this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
@@ -75,10 +74,9 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(129, 73);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox1.Location = new System.Drawing.Point(97, 59);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(415, 22);
+            this.textBox1.Size = new System.Drawing.Size(312, 20);
             this.textBox1.TabIndex = 0;
             this.textBox1.Text = "https://da.wikipedia.org/wiki/Christoffer_Columbus";
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
@@ -86,10 +84,9 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(36, 76);
-            this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label1.Location = new System.Drawing.Point(27, 62);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(70, 16);
+            this.label1.Size = new System.Drawing.Size(58, 13);
             this.label1.TabIndex = 1;
             this.label1.Text = "Go to URL";
             this.label1.Click += new System.EventHandler(this.label1_Click);
@@ -97,20 +94,18 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(36, 174);
-            this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(27, 141);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(65, 16);
+            this.label2.Size = new System.Drawing.Size(53, 13);
             this.label2.TabIndex = 2;
             this.label2.Text = "Set depth";
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // numericUpDown1
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(129, 171);
-            this.numericUpDown1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.numericUpDown1.Location = new System.Drawing.Point(97, 139);
             this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(160, 22);
+            this.numericUpDown1.Size = new System.Drawing.Size(120, 20);
             this.numericUpDown1.TabIndex = 3;
             this.numericUpDown1.Value = new decimal(new int[] {
             3,
@@ -121,19 +116,17 @@
             // 
             // webBrowser1
             // 
-            this.webBrowser1.Location = new System.Drawing.Point(709, 73);
-            this.webBrowser1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.webBrowser1.Location = new System.Drawing.Point(532, 59);
             this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(667, 615);
+            this.webBrowser1.Size = new System.Drawing.Size(500, 500);
             this.webBrowser1.TabIndex = 4;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(705, 53);
-            this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label3.Location = new System.Drawing.Point(529, 43);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(116, 16);
+            this.label3.Size = new System.Drawing.Size(91, 13);
             this.label3.TabIndex = 5;
             this.label3.Text = "Webpage snippet";
             this.label3.Click += new System.EventHandler(this.label3_Click);
@@ -144,10 +137,9 @@
             this.miniToolStrip.Dock = System.Windows.Forms.DockStyle.None;
             this.miniToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Edit});
-            this.miniToolStrip.Location = new System.Drawing.Point(52, 2);
+            this.miniToolStrip.Location = new System.Drawing.Point(39, 2);
             this.miniToolStrip.Name = "miniToolStrip";
-            this.miniToolStrip.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
-            this.miniToolStrip.Size = new System.Drawing.Size(1001, 26);
+            this.miniToolStrip.Size = new System.Drawing.Size(751, 21);
             this.miniToolStrip.TabIndex = 6;
             this.miniToolStrip.Visible = false;
             // 
@@ -157,7 +149,7 @@
             this.saveResultToolStripMenuItem,
             this.aboutToolStripMenuItem});
             this.Edit.Name = "Edit";
-            this.Edit.Size = new System.Drawing.Size(39, 22);
+            this.Edit.Size = new System.Drawing.Size(39, 17);
             this.Edit.Text = "Edit";
             this.Edit.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
             // 
@@ -211,23 +203,12 @@
             this.theAuthorToolStripMenuItem.Size = new System.Drawing.Size(134, 22);
             this.theAuthorToolStripMenuItem.Text = "The author";
             // 
-            // listView1
-            // 
-            this.listView1.HideSelection = false;
-            this.listView1.Location = new System.Drawing.Point(41, 357);
-            this.listView1.Margin = new System.Windows.Forms.Padding(0);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(527, 186);
-            this.listView1.TabIndex = 7;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(37, 337);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Location = new System.Drawing.Point(28, 274);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(46, 16);
+            this.label4.Size = new System.Drawing.Size(37, 13);
             this.label4.TabIndex = 8;
             this.label4.Text = "Result";
             this.label4.Click += new System.EventHandler(this.label4_Click);
@@ -238,14 +219,13 @@
             this.chart1.ChartAreas.Add(chartArea1);
             legend1.Name = "Legend1";
             this.chart1.Legends.Add(legend1);
-            this.chart1.Location = new System.Drawing.Point(41, 569);
-            this.chart1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.chart1.Location = new System.Drawing.Point(31, 462);
             this.chart1.Name = "chart1";
             series1.ChartArea = "ChartArea1";
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.chart1.Series.Add(series1);
-            this.chart1.Size = new System.Drawing.Size(528, 169);
+            this.chart1.Size = new System.Drawing.Size(396, 137);
             this.chart1.TabIndex = 9;
             this.chart1.Text = "chart1";
             // 
@@ -268,8 +248,7 @@
             this.editToolStripMenuItem});
             this.menuStrip2.Location = new System.Drawing.Point(0, 0);
             this.menuStrip2.Name = "menuStrip2";
-            this.menuStrip2.Padding = new System.Windows.Forms.Padding(8, 2, 0, 2);
-            this.menuStrip2.Size = new System.Drawing.Size(1445, 24);
+            this.menuStrip2.Size = new System.Drawing.Size(1084, 24);
             this.menuStrip2.TabIndex = 11;
             this.menuStrip2.Text = "menuStrip2";
             // 
@@ -327,10 +306,9 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(40, 313);
-            this.checkBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.checkBox1.Location = new System.Drawing.Point(30, 254);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(379, 20);
+            this.checkBox1.Size = new System.Drawing.Size(312, 17);
             this.checkBox1.TabIndex = 12;
             this.checkBox1.Text = "Check for depth-first search, uncheck for breadth-first search";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -338,30 +316,27 @@
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(129, 122);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox2.Location = new System.Drawing.Point(97, 99);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(415, 22);
+            this.textBox2.Size = new System.Drawing.Size(312, 20);
             this.textBox2.TabIndex = 13;
             this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged_1);
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(4, 126);
-            this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label5.Location = new System.Drawing.Point(3, 102);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(102, 16);
+            this.label5.Size = new System.Drawing.Size(82, 13);
             this.label5.TabIndex = 14;
             this.label5.Text = "Use wiki search";
             this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(41, 252);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.button1.Location = new System.Drawing.Point(31, 205);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(100, 28);
+            this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 15;
             this.button1.Text = "Start";
             this.button1.UseVisualStyleBackColor = true;
@@ -369,19 +344,20 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(468, 252);
+            this.richTextBox1.Location = new System.Drawing.Point(30, 289);
+            this.richTextBox1.Margin = new System.Windows.Forms.Padding(2);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(234, 96);
+            this.richTextBox1.Size = new System.Drawing.Size(397, 168);
             this.richTextBox1.TabIndex = 16;
             this.richTextBox1.Text = "";
             // 
             // ScraperAgentGUI
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1445, 752);
+            this.ClientSize = new System.Drawing.Size(1084, 611);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label5);
@@ -389,7 +365,6 @@
             this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.chart1);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.listView1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.webBrowser1);
             this.Controls.Add(this.numericUpDown1);
@@ -400,7 +375,6 @@
             this.Controls.Add(this.miniToolStrip);
             this.Location = new System.Drawing.Point(15, 15);
             this.MainMenuStrip = this.menuStrip2;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "ScraperAgentGUI";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
@@ -430,7 +404,6 @@
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem theCrawlerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem theAuthorToolStripMenuItem;
-        private System.Windows.Forms.ListView listView1;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private System.Windows.Forms.MenuStrip miniToolStrip;

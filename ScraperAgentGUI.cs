@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace WikiScraper
 {
@@ -23,6 +24,11 @@ namespace WikiScraper
 
         public void Prepare()
         {
+            var series = new Series("Finance");
+
+            // Frist parameter is X-Axis and Second is Collection of Y- Axis
+            series.Points.DataBindXY(new[] { 2001, 2002, 2003, 2004 }, new[] { 100, 200, 90, 150 });
+            chart1.Series.Add(series);
             ts = new CancellationTokenSource();
             try
             {
@@ -33,7 +39,7 @@ namespace WikiScraper
                 }
                 for (int i = 0; i < crawlers; i++)
                 {
-                    // Start x number of agents
+                  
                     var crawler = new Crawler();
 
                     Task t = Task.Run(() =>
@@ -42,17 +48,19 @@ namespace WikiScraper
                         
                         MethodInvoker update = delegate
                         {
-                           
+
                             foreach (var item in dict)
                             {
+
                                 //ListViewItem listItem = new ListViewItem(item+"");
-                                richTextBox1.Text = item + ""; 
+                                richTextBox1.AppendText(item.Value + "     " + item.Key + "\n");
+
                             }
                             
 
 
                         };
-                        listView1.BeginInvoke(update);
+                        richTextBox1.BeginInvoke(update);
                     }
                         );
                 }
@@ -65,12 +73,13 @@ namespace WikiScraper
             }
         }
 
+
         public ScraperAgentGUI()
         {
             InitializeComponent();
-            
 
-            this.webBrowser1.Navigate("https://en.m.wikipedia.org/wiki/Christopher_Columbus");
+            this.webBrowser1.Navigate(this.textBox1.Text);
+            //this.webBrowser1.Navigate("https://en.m.wikipedia.org/wiki/Christopher_Columbus");
 
         }
 
@@ -82,6 +91,7 @@ namespace WikiScraper
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
+            this.webBrowser1.Navigate(textBox1.Text);
             textBox2.Clear();
         }
 
@@ -149,12 +159,14 @@ namespace WikiScraper
 
         private void textBox2_TextChanged_1(object sender, EventArgs e)
         {
+            
             textBox1.Clear();
         }
         #endregion
 
         private void button1_Click(object sender, EventArgs e)
         {
+            
             this.Prepare();
         }
     }
