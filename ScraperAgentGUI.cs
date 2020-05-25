@@ -16,6 +16,7 @@ namespace WikiScraper
     public partial class ScraperAgentGUI : Form
     {
 
+        
         Crawler crawler;
         CancellationTokenSource ts;
 
@@ -38,15 +39,16 @@ namespace WikiScraper
                     Task t = Task.Run(() =>
                     { 
                         Dictionary<string, int> dict = crawler.Start(ts.Token, this.textBox1.Text);
+                        
                         MethodInvoker update = delegate
                         {
                            
                             foreach (var item in dict)
                             {
-                                listView1.Items.Add(item + "");
+                                //ListViewItem listItem = new ListViewItem(item+"");
+                                richTextBox1.Text = item + ""; 
                             }
-
-
+                            
 
 
                         };
@@ -66,7 +68,7 @@ namespace WikiScraper
         public ScraperAgentGUI()
         {
             InitializeComponent();
-
+            
 
             this.webBrowser1.Navigate("https://en.m.wikipedia.org/wiki/Christopher_Columbus");
 

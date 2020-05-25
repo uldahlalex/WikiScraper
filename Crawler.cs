@@ -33,7 +33,7 @@ namespace WikiScraper
                 }, StringSplitOptions.RemoveEmptyEntries);
                 string text = string.Join("\r\n", sentences.Select(s => r.Replace(s, " ").Trim()));
                 Console.WriteLine(text);
-
+            text.ToLower();
                 
                 var dict = this.frequencies(text);
                 foreach (var item in dict)
