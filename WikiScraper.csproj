@@ -56,6 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Crawler.cs" />
+    <Compile Include="models\Link.cs" />
     <Compile Include="ScraperAgentGUI.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -91,8 +92,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="models\" />
-    <Folder Include="scraperagent" />
+    <Folder Include="scraperagent\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

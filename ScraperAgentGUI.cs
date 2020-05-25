@@ -1,76 +1,137 @@
 ﻿using HtmlAgilityPack;
 using System;
+using System.CodeDom;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
+using WikiScraper.models;
 
 namespace WikiScraper
 {
     public partial class ScraperAgentGUI : Form
     {
 
-        
-        Crawler crawler;
         CancellationTokenSource ts;
+        public Dictionary<string, int> dict = new Dictionary<string, int>();
 
+        public List<Link> links = new List<Link>();
+
+        public int iteration = 0;
+
+        public string allText = "";
 
         public void Prepare()
         {
-            var series = new Series("Finance");
+            iteration++;
+            Link link = new Link();
 
-            // Frist parameter is X-Axis and Second is Collection of Y- Axis
-            series.Points.DataBindXY(new[] { 2001, 2002, 2003, 2004 }, new[] { 100, 200, 90, 150 });
-            chart1.Series.Add(series);
+            link.URL = textBox1.Text;
+            link.Depth = iteration;
+            link.visited = false;
+
+            links.Add(link);
+
             ts = new CancellationTokenSource();
-            try
+            foreach (Link l in links)
             {
-                int crawlers = 1;
-                if (crawlers == 0)
+                if (l.visited != true)
                 {
-                    throw new Exception();
-                }
-                for (int i = 0; i < crawlers; i++)
-                {
-                  
-                    var crawler = new Crawler();
-
-                    Task t = Task.Run(() =>
-                    { 
-                        Dictionary<string, int> dict = crawler.Start(ts.Token, this.textBox1.Text);
-                        
-                        MethodInvoker update = delegate
+                    try
+                    {
+                        int crawlers = 2;
+                        if (crawlers == 0)
+                        {
+                            throw new Exception();
+                        }
+                        for (int i = 0; i < crawlers; i++)
                         {
 
-                            foreach (var item in dict)
+                            var crawler = new Crawler(this);
+
+                            Task t = Task.Run(() =>
                             {
-
-                                //ListViewItem listItem = new ListViewItem(item+"");
-                                richTextBox1.AppendText(item.Value + "     " + item.Key + "\n");
-
+                                crawler.Start(ts.Token, l);
                             }
-                            
+                                );
+                        }
 
 
-                        };
-                        richTextBox1.BeginInvoke(update);
+
                     }
-                        );
+                    catch (Exception ex)
+                    {
+
+                        return;
+                    }
                 }
 
             }
-            catch (Exception ex)
+
+            dict = this.frequencies(allText);
+            foreach (var item in dict)
+            {
+                Console.WriteLine(item.Key);
+                Console.WriteLine(item.Value);
+            }
+            setGUI();
+
+
+        }
+
+        private Dictionary<string, int> frequencies(string text)
+        {
+            Dictionary<string, int> count =
+                text.Split(' ')
+                    .GroupBy(s => s)
+                    .ToDictionary(g => g.Key, g => g.Count());
+            var items = from item in count orderby item.Value descending select item;
+            return items.ToDictionary(pair => pair.Key, pair => pair.Value);
+        }
+
+        private void setGUI()
+        {
+            //start off by clearing the GUI and then setting it
+            MethodInvoker update = delegate
             {
                 
-                return;
-            }
+                foreach (var item in this.dict)
+                {
+                    richTextBox1.AppendText(item.Value + "     " + item.Key + "\n");
+                }
+                //setting the chart
+                /*int[] vals = new int[dict.Count];
+                dict.Values.CopyTo(vals, 0);
+                int[] shortened = new int[5];
+                Array.Copy(vals, shortened, shortened.Length);
+
+                String[] keys = new String[dict.Count];
+                dict.Keys.CopyTo(keys, 0);
+                String[] shortKeys = new String[5];
+                Array.Copy(keys, shortKeys, shortKeys.Length);
+
+                var series = new Series("Highest word frequencies");
+                series.Points.DataBindXY(shortKeys, shortened);
+                chart1.Series.Add(series);
+                dict.Clear();*/
+
+                foreach (Link l in links)
+                {
+                    richTextBox2.AppendText(l.URL + "\n");
+                }
+                
+
+            };
+            richTextBox1.BeginInvoke(update);
+
         }
 
 
