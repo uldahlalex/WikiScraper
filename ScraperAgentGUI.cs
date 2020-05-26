@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -61,23 +62,34 @@ namespace WikiScraper
 
 
 
-                            DateTime when = DateTime.Parse("27/05/2020 09:54");
+                            DateTime when = DateTime.Parse("26/05/2020 12:27:45");
                             Console.WriteLine(when);
 
                             DateTime now = DateTime.Now;
                             TimeSpan span = when - now;
                             Console.WriteLine(span.TotalMilliseconds);
-                            if (span.TotalMilliseconds > 0)
+                            int millis = Convert.ToInt32(span.TotalMilliseconds);
+                            if(millis>0)
                             {
-                                int millis = Convert.ToInt32(span.TotalMilliseconds);
-                                Task t = Task.Delay(millis);
-                                Task task = Task.Run(() =>
-                                {
-                                    crawler.Start(ts.Token, l, numericUpDown1.Value);
-                                });
+                            
+
+                                   
+                                   Task t = Task.Delay(millis);
+                               
+                               t.ContinueWith(task =>
+                              {
+                                  crawler.Start(ts.Token, l, numericUpDown1.Value);
+                              
+
+                           });
+}
+                            else
+                            {
+                                Task t = Task.Run( () =>
+                               {
+                                   crawler.Start(ts.Token, l, numericUpDown1.Value);
+                               });
                             }
-
-
 
 
                         }
@@ -168,6 +180,23 @@ namespace WikiScraper
 
         #region GUI controls related methods
 
+        private void saveAsCSV(object sender, EventArgs e)
+        {
+            Console.WriteLine("saving");
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+            saveFileDialog1.Filter = "CSV file|*.csv";
+            saveFileDialog1.Title = "Save data locally";
+            saveFileDialog1.ShowDialog();
+
+            
+            // If the file name is not an empty string open it for saving.
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                System.IO.StreamWriter file = new System.IO.StreamWriter(saveFileDialog1.FileName.ToString());
+                file.WriteLine(richTextBox1.Text);
+                file.Close();
+            }
+        }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
