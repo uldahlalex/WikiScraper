@@ -146,7 +146,7 @@ namespace WikiScraper
                 {
                     richTextBox2.AppendText(num++ +": "+l.URL + "\n\n");
                 }
-                
+                richTextBox3.Text = "Scraping completed";
 
             };
             richTextBox1.BeginInvoke(update);
@@ -267,6 +267,36 @@ namespace WikiScraper
         private void openLink(object sender, LinkClickedEventArgs e)
         {
             this.webBrowser1.Navigate(e.LinkText);
+        }
+
+        private void webBrowser1_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+
+        }
+
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void richTextBox3_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void saveAsToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void editToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
