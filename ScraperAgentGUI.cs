@@ -59,11 +59,27 @@ namespace WikiScraper
 
                             var crawler = new Crawler(this);
 
-                            Task t = Task.Run(() =>
+
+
+                            DateTime when = DateTime.Parse("27/05/2020 09:54");
+                            Console.WriteLine(when);
+
+                            DateTime now = DateTime.Now;
+                            TimeSpan span = when - now;
+                            Console.WriteLine(span.TotalMilliseconds);
+                            if (span.TotalMilliseconds > 0)
                             {
-                                crawler.Start(ts.Token, l, numericUpDown1.Value);
+                                int millis = Convert.ToInt32(span.TotalMilliseconds);
+                                Task t = Task.Delay(millis);
+                                Task task = Task.Run(() =>
+                                {
+                                    crawler.Start(ts.Token, l, numericUpDown1.Value);
+                                });
                             }
-                                );
+
+
+
+
                         }
 
 
