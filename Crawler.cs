@@ -25,7 +25,7 @@ namespace WikiScraper
 
         public void Start(CancellationToken token, Link link, decimal depth)
         {
-
+            
             UriBuilder ub = new UriBuilder(link.URL);
 
             HtmlWeb hweb = new HtmlWeb();

@@ -30,8 +30,15 @@ namespace WikiScraper
 
         public string allText = "";
 
+        private void updateMessage()
+        {
+            richTextBox3.Text = "Currently working...";
+        }
+
         public void Prepare()
         {
+            updateMessage();
+           
             iteration++;
             Link link = new Link();
 
@@ -68,6 +75,7 @@ namespace WikiScraper
                             DateTime now = DateTime.Now;
                             TimeSpan span = when - now;
                             Console.WriteLine(span.TotalMilliseconds);
+                            
                             int millis = Convert.ToInt32(span.TotalMilliseconds);
                             if(millis>0)
                             {
@@ -78,6 +86,7 @@ namespace WikiScraper
                                
                                t.ContinueWith(task =>
                               {
+                                 
                                   crawler.Start(ts.Token, l, numericUpDown1.Value);
                               
 
@@ -87,6 +96,7 @@ namespace WikiScraper
                             {
                                 Task t = Task.Run( () =>
                                {
+                                   
                                    crawler.Start(ts.Token, l, numericUpDown1.Value);
                                });
                             }
@@ -131,8 +141,6 @@ namespace WikiScraper
         {
             //start off by clearing the GUI and then setting it
             richTextBox1.Clear();
-            MethodInvoker update = delegate
-            {
                 
                 foreach (var item in dict)
                 {
@@ -160,8 +168,6 @@ namespace WikiScraper
                 }
                 richTextBox3.Text = "Scraping completed";
 
-            };
-            richTextBox1.BeginInvoke(update);
 
         }
 
@@ -169,9 +175,11 @@ namespace WikiScraper
         public ScraperAgentGUI()
         {
             InitializeComponent();
-
+            Prepare();
+            richTextBox3.Clear();
+            richTextBox1.Clear();
+            richTextBox2.Clear();
             this.webBrowser1.Navigate(this.textBox1.Text);
-            //this.webBrowser1.Navigate("https://en.m.wikipedia.org/wiki/Christopher_Columbus");
 
         }
 
