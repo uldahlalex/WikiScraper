@@ -117,11 +117,6 @@ namespace WikiScraper
             }
 
             dict = this.frequencies(allText);
-            foreach (var item in dict)
-            {
-                Console.WriteLine(item.Key);
-                Console.WriteLine(item.Value);
-            }
             setGUI();
 
 
@@ -206,6 +201,50 @@ namespace WikiScraper
             }
         }
 
+        private void openAboutAuthor(object sender, EventArgs e)
+        {
+            var formPopup = new Form();
+            formPopup.Text = "About the program";
+
+            RichTextBox aboutcontent = new RichTextBox();
+
+
+            //aboutcontent.Location = new System.Drawing.Point(9, 212);
+
+            aboutcontent.Name = "richTextBox1";
+            aboutcontent.ReadOnly = true;
+            aboutcontent.Size = new System.Drawing.Size(290, 300);
+            //aboutcontent.TabIndex = 16;
+            aboutcontent.Text = "Alex Uldahl Pedersen\nComputer Science Student\nLinkedIn: https://www.linkedin.com/in/alexuldahlpedersen/";
+
+
+
+            formPopup.Controls.Add(aboutcontent);
+            formPopup.Show(this); // if you need non-modal window
+        }
+
+        private void openAboutScraper(object sender, EventArgs e)
+        {
+            var formPopup = new Form();
+            formPopup.Text = "About the program";
+            
+            RichTextBox aboutcontent = new RichTextBox();
+
+
+            //aboutcontent.Location = new System.Drawing.Point(9, 212);
+            
+            aboutcontent.Name = "richTextBox1";
+            aboutcontent.ReadOnly = true;
+            aboutcontent.Size = new System.Drawing.Size(290, 300);
+            //aboutcontent.TabIndex = 16;
+            aboutcontent.Text = "Developed for examination purposes.\nSubject: Autonomous Agents\nLecturer: Bent H. Pedersen\nStudent: Alex Uldahl Pedersen\nInstitution: Business Academy Southwest\n\nC# .NET Framework 4.7.2 Windows Application\nMay 2020";
+            
+
+
+            formPopup.Controls.Add(aboutcontent);
+            formPopup.Show(this); // if you need non-modal window
+        }
+
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             this.webBrowser1.Navigate(textBox1.Text);
@@ -260,16 +299,6 @@ namespace WikiScraper
         {
 
 
-
-        }
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label5_Click(object sender, EventArgs e)
-        {
 
         }
 

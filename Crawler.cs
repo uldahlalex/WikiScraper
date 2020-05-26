@@ -32,16 +32,23 @@ namespace WikiScraper
             hweb.UserAgent = "uldahl";
             HtmlDocument doc = hweb.Load(ub.Uri.ToString());
 
-            foreach (HtmlNode linkHere in doc.DocumentNode.SelectNodes("//a[@href]"))
+            foreach (HtmlNode linkHere in doc.DocumentNode.SelectNodes("//a[@href]") )
             {
                 if (scraper.iteration < (int)depth)
                 {
                     HtmlAttribute att = linkHere.Attributes["href"];
+                    Console.WriteLine(att.Value);
                     if ((att.Value.Contains("http://") || att.Value.Contains("https://")) && att.Value.Contains("wiki")) //evt lav kun dansk wiki
                     {
                         this.scraper.links.Add(new Link { URL = att.Value, Depth = 1, visited = false });
                         scraper.iteration++;
                     }
+                    else if (att.Value.Contains("/wiki/")) //interne wiki links
+                    {
+                        this.scraper.links.Add(new Link { URL = "https://en.wikipedia.org"+att.Value, Depth = 1, visited = false });
+                        scraper.iteration++;
+                    }
+                    
                 }
 
             }
