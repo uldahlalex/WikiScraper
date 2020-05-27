@@ -23,6 +23,11 @@ namespace WikiScraper
             this.scraper = scraper;
         }
 
+        public void helloWorld()
+        {
+            Console.WriteLine("helloworldhowueflj");
+        }
+
         public void Start(CancellationToken token, Link link, decimal articleLimit)
         {
             

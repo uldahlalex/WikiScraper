@@ -38,7 +38,7 @@ namespace WikiScraper
         public void Prepare()
         {
             updateMessage();
-           
+
             articles++;
             Link link = new Link();
 
@@ -63,60 +63,53 @@ namespace WikiScraper
                         }
                         for (int i = 0; i < (int)threads; i++)
                         {
-
                             var crawler = new Crawler(this);
-
-                            DateTime when = DateTime.Parse("26/05/2020 12:27:45");
-                            Console.WriteLine(when);
-
+                            DateTime when = dateTimePicker1.Value;
                             DateTime now = DateTime.Now;
                             TimeSpan span = when - now;
-                            Console.WriteLine(span.TotalMilliseconds);
-                            
+
                             int millis = Convert.ToInt32(span.TotalMilliseconds);
-                            if(millis>0)
+                            if (millis > 0)
                             {
-                            
+                                Task.Delay(millis).ContinueWith(t => {
+                                    MethodInvoker update = delegate
+                                    {
+                                        dict = this.frequencies(allText);
+                                        setGUI();
+                                    };
+                                    crawler.Start(ts.Token, l, numericUpDown1.Value);
+                                    BeginInvoke(update);
+                                });
 
-                                   
-                                   Task t = Task.Delay(millis);
-                               
-                               t.ContinueWith(task =>
-                              {
-                                 
-                                  crawler.Start(ts.Token, l, numericUpDown1.Value);
-                              
 
-                           });
-}
-                            else
-                            {
-                                Task t = Task.Run( () =>
-                               {
-                                   
-                                   crawler.Start(ts.Token, l, numericUpDown1.Value);
-                               });
+                                /*
+                                Task t = Task.Delay(millis);
+                                t.ContinueWith(task =>
+                                {
+                                    crawler.Start(ts.Token, l, numericUpDown1.Value);
+                                });*/
                             }
-
-
+                            else if(millis<0)
+                            {
+                                Task t = Task.Run(() =>
+                                {
+                                    crawler.Start(ts.Token, l, numericUpDown1.Value);
+                                    Console.WriteLine("hello world");
+                                });
+                            }
                         }
-
-
-
                     }
                     catch (Exception ex)
                     {
-
                         return;
                     }
                 }
 
             }
-
-            dict = this.frequencies(allText);
-            setGUI();
-
-
+            
+            
+           
+                
         }
 
         private Dictionary<string, int> frequencies(string text)
@@ -133,32 +126,32 @@ namespace WikiScraper
         {
             //start off by clearing the GUI and then setting it
             richTextBox1.Clear();
-                
-                foreach (var item in dict)
-                {
-                    richTextBox1.AppendText(item.Value + "     " + item.Key + "\n");
-                }
-                //setting the chart
-                /*int[] vals = new int[dict.Count];
-                dict.Values.CopyTo(vals, 0);
-                int[] shortened = new int[5];
-                Array.Copy(vals, shortened, shortened.Length);
 
-                String[] keys = new String[dict.Count];
-                dict.Keys.CopyTo(keys, 0);
-                String[] shortKeys = new String[5];
-                Array.Copy(keys, shortKeys, shortKeys.Length);
+            foreach (var item in dict)
+            {
+                richTextBox1.AppendText(item.Value + "     " + item.Key + "\n");
+            }
+            //setting the chart
+            /*int[] vals = new int[dict.Count];
+            dict.Values.CopyTo(vals, 0);
+            int[] shortened = new int[5];
+            Array.Copy(vals, shortened, shortened.Length);
 
-                var series = new Series("Highest word frequencies");
-                series.Points.DataBindXY(shortKeys, shortened);
-                chart1.Series.Add(series);
-                dict.Clear();*/
-                int num = 0;
-                foreach (Link l in links)
-                {
-                    richTextBox2.AppendText(num++ +": "+l.URL + "\n\n");
-                }
-                richTextBox3.Text = "Scraping completed";
+            String[] keys = new String[dict.Count];
+            dict.Keys.CopyTo(keys, 0);
+            String[] shortKeys = new String[5];
+            Array.Copy(keys, shortKeys, shortKeys.Length);
+
+            var series = new Series("Highest word frequencies");
+            series.Points.DataBindXY(shortKeys, shortened);
+            chart1.Series.Add(series);
+            dict.Clear();*/
+            int num = 0;
+            foreach (Link l in links)
+            {
+                richTextBox2.AppendText(num++ + ": " + l.URL + "\n\n");
+            }
+            richTextBox3.Text = "Scraping completed";
 
 
         }
@@ -167,7 +160,7 @@ namespace WikiScraper
         public ScraperAgentManager()
         {
             InitializeComponent();
-            Prepare();
+            //Prepare();
             richTextBox3.Clear();
             richTextBox1.Clear();
             richTextBox2.Clear();
@@ -188,7 +181,7 @@ namespace WikiScraper
             saveFileDialog1.Title = "Save data locally";
             saveFileDialog1.ShowDialog();
 
-            
+
             // If the file name is not an empty string open it for saving.
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
@@ -224,18 +217,18 @@ namespace WikiScraper
         {
             var formPopup = new Form();
             formPopup.Text = "About the program";
-            
+
             RichTextBox aboutcontent = new RichTextBox();
 
 
             //aboutcontent.Location = new System.Drawing.Point(9, 212);
-            
+
             aboutcontent.Name = "richTextBox1";
             aboutcontent.ReadOnly = true;
             aboutcontent.Size = new System.Drawing.Size(290, 300);
             //aboutcontent.TabIndex = 16;
             aboutcontent.Text = "Developed for examination purposes.\nSubject: Autonomous Agents\nLecturer: Bent H. Pedersen\nStudent: Alex Uldahl Pedersen\nInstitution: Business Academy Southwest\n\nC# .NET Framework 4.7.2 Windows Application\nMay 2020";
-            
+
 
 
             formPopup.Controls.Add(aboutcontent);
@@ -284,12 +277,12 @@ namespace WikiScraper
 
         private void textBox2_TextChanged(object sender, EventArgs e)
         {
-            
+
         }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
-            
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -301,14 +294,14 @@ namespace WikiScraper
 
         private void textBox2_TextChanged_1(object sender, EventArgs e)
         {
-            
+
             textBox1.Clear();
         }
         #endregion
 
         private void button1_Click(object sender, EventArgs e)
         {
-            
+
             this.Prepare();
         }
 

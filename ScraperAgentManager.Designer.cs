@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Windows.Forms;
 
 namespace WikiScraper
 {
@@ -33,9 +34,9 @@ namespace WikiScraper
     /// </summary>
     private void InitializeComponent()
     {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea11 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend11 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series11 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -101,11 +102,11 @@ namespace WikiScraper
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(83, 67);
+            this.label2.Location = new System.Drawing.Point(62, 67);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 13);
+            this.label2.Size = new System.Drawing.Size(73, 13);
             this.label2.TabIndex = 2;
-            this.label2.Text = "Set depth";
+            this.label2.Text = "Max # of links";
             this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // numericUpDown1
@@ -143,6 +144,7 @@ namespace WikiScraper
             // 
             this.miniToolStrip.AutoSize = false;
             this.miniToolStrip.Dock = System.Windows.Forms.DockStyle.None;
+            this.miniToolStrip.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.miniToolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.Edit});
             this.miniToolStrip.Location = new System.Drawing.Point(39, 2);
@@ -223,16 +225,16 @@ namespace WikiScraper
             // 
             // chart1
             // 
-            chartArea11.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea11);
-            legend11.Name = "Legend1";
-            this.chart1.Legends.Add(legend11);
+            chartArea3.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.chart1.Legends.Add(legend3);
             this.chart1.Location = new System.Drawing.Point(10, 492);
             this.chart1.Name = "chart1";
-            series11.ChartArea = "ChartArea1";
-            series11.Legend = "Legend1";
-            series11.Name = "Series1";
-            this.chart1.Series.Add(series11);
+            series3.ChartArea = "ChartArea1";
+            series3.Legend = "Legend1";
+            series3.Name = "Series1";
+            this.chart1.Series.Add(series3);
             this.chart1.Size = new System.Drawing.Size(517, 249);
             this.chart1.TabIndex = 9;
             this.chart1.Text = "chart1";
@@ -241,6 +243,7 @@ namespace WikiScraper
             // 
             this.menuStrip1.AutoSize = false;
             this.menuStrip1.Dock = System.Windows.Forms.DockStyle.None;
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -252,6 +255,7 @@ namespace WikiScraper
             // 
             // menuStrip2
             // 
+            this.menuStrip2.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.saveAsToolStripMenuItem1,
             this.editToolStripMenuItem});
@@ -273,7 +277,7 @@ namespace WikiScraper
             // csvToolStripMenuItem
             // 
             this.csvToolStripMenuItem.Name = "csvToolStripMenuItem";
-            this.csvToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.csvToolStripMenuItem.Size = new System.Drawing.Size(94, 22);
             this.csvToolStripMenuItem.Text = ".csv";
             this.csvToolStripMenuItem.Click += new System.EventHandler(this.saveAsCSV);
             // 
@@ -290,14 +294,14 @@ namespace WikiScraper
             // theProgramToolStripMenuItem
             // 
             this.theProgramToolStripMenuItem.Name = "theProgramToolStripMenuItem";
-            this.theProgramToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.theProgramToolStripMenuItem.Size = new System.Drawing.Size(142, 22);
             this.theProgramToolStripMenuItem.Text = "The program";
             this.theProgramToolStripMenuItem.Click += new System.EventHandler(this.openAboutScraper);
             // 
             // theAuthorToolStripMenuItem1
             // 
             this.theAuthorToolStripMenuItem1.Name = "theAuthorToolStripMenuItem1";
-            this.theAuthorToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.theAuthorToolStripMenuItem1.Size = new System.Drawing.Size(142, 22);
             this.theAuthorToolStripMenuItem1.Text = "The author";
             this.theAuthorToolStripMenuItem1.Click += new System.EventHandler(this.openAboutAuthor);
             // 
@@ -397,21 +401,23 @@ namespace WikiScraper
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(142, 134);
+            this.dateTimePicker1.Location = new System.Drawing.Point(118, 134);
+            this.dateTimePicker1.Format = DateTimePickerFormat.Custom;
+            this.dateTimePicker1.CustomFormat = "dd/MM/yyyy hh:mm:ss";
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(121, 20);
+            this.dateTimePicker1.Size = new System.Drawing.Size(158, 20);
             this.dateTimePicker1.TabIndex = 24;
             // 
             // button2
             // 
             this.button2.Location = new System.Drawing.Point(9, 134);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(126, 20);
+            this.button2.Size = new System.Drawing.Size(103, 20);
             this.button2.TabIndex = 25;
             this.button2.Text = "Schedule run at";
             this.button2.UseVisualStyleBackColor = true;
             // 
-            // ScraperAgentGUI
+            // ScraperAgentManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -441,7 +447,7 @@ namespace WikiScraper
             this.Controls.Add(this.miniToolStrip);
             this.Location = new System.Drawing.Point(15, 15);
             this.MainMenuStrip = this.menuStrip2;
-            this.Name = "ScraperAgentGUI";
+            this.Name = "ScraperAgentManager";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.miniToolStrip.ResumeLayout(false);
