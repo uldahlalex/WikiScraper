@@ -37,8 +37,6 @@ namespace WikiScraper
 
         public void Prepare()
         {
-            
-
             updateMessage();
 
             articles++;
@@ -51,8 +49,10 @@ namespace WikiScraper
             links.Add(link);
 
             ts = new CancellationTokenSource();
-            
-
+            foreach (Link l in links) //pt registrerer den ikke den ever-forøgende mængde af links - den tager blot de som er til stede pt, og scraper disse. Det er derfor, at når man trykker "start" vil man begynde at scrape nye sider
+            {
+                if (l.visited != true)
+                {
                     try
                     {
                         decimal threads = numericUpDown2.Value;
@@ -61,66 +61,51 @@ namespace WikiScraper
                         {
                             throw new Exception();
                         }
-                        DateTime when = dateTimePicker1.Value;
-                        DateTime now = DateTime.Now;
-                        TimeSpan span = when - now;
-
-                        var crawler = new Crawler(this);
-
-
-                        int millis = Convert.ToInt32(span.TotalMilliseconds);
-                        if (millis > 0)
-                        {
-                            MethodInvoker update = delegate
-                            {
-                                dict = this.frequencies(allText);
-                                setGUI();
-                            };
                         for (int i = 0; i < (int)threads; i++)
                         {
-                            Task.Delay(millis).ContinueWith(t =>
+                            var crawler = new Crawler(this);
+                            DateTime when = dateTimePicker1.Value;
+                            DateTime now = DateTime.Now;
+                            TimeSpan span = when - now;
+
+                            int millis = Convert.ToInt32(span.TotalMilliseconds);
+                            if (millis > 0)
                             {
-                                foreach (Link l in links) //pt registrerer den ikke den ever-forøgende mængde af links - den tager blot de som er til stede pt, og scraper disse. Det er derfor, at når man trykker "start" vil man begynde at scrape nye sider
+                                Task.Delay(millis).ContinueWith(t => {
+                                    MethodInvoker update = delegate
                                     {
-                                    crawler.helloWorld();
+                                        dict = this.frequencies(allText);
+                                        setGUI();
+                                    };
                                     crawler.Start(ts.Token, l, numericUpDown1.Value);
-                                }
+                                    BeginInvoke(update);
+                                });
 
-                            });
-                        }
-                        BeginInvoke(update);
 
-                        /*
-                        Task t = Task.Delay(millis);
-                        t.ContinueWith(task =>
-                        {
-                            crawler.Start(ts.Token, l, numericUpDown1.Value);
-                        });*/
-                    }
-                    else if (millis < 0)
-                        {
-                        for (int i = 0; i < (int)threads; i++)
-                        {
-
-                                foreach (Link l in links) //pt registrerer den ikke den ever-forøgende mængde af links - den tager blot de som er til stede pt, og scraper disse. Det er derfor, at når man trykker "start" vil man begynde at scrape nye sider
+                                /*
+                                Task t = Task.Delay(millis);
+                                t.ContinueWith(task =>
                                 {
-                                    crawler.helloWorld();
                                     crawler.Start(ts.Token, l, numericUpDown1.Value);
-                                }
-
-                           
+                                });*/
+                            }
+                            else if(millis<0)
+                            {
+                                Task t = Task.Run(() =>
+                                {
+                                    crawler.Start(ts.Token, l, numericUpDown1.Value);
+                                    Console.WriteLine("hello world");
+                                });
+                            }
                         }
-                    }
-
-
                     }
                     catch (Exception ex)
                     {
                         return;
                     }
-                
+                }
 
-            
+            }
             
             
            
