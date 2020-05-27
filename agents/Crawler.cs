@@ -17,9 +17,9 @@ namespace WikiScraper
 
         private ScraperAgentManager manager;
 
-        public Crawler(ScraperAgentManager scraper)
+        public Crawler(ScraperAgentManager manager)
         {
-            this.manager = scraper;
+            this.manager = manager;
         }
 
         public void helloWorld()
@@ -43,12 +43,12 @@ namespace WikiScraper
                     HtmlAttribute att = linkHere.Attributes["href"];
                     if ((att.Value.Contains("http://") || att.Value.Contains("https://")) && att.Value.Contains("en.wikikedia")) 
                     {
-                        this.manager.links.Add(new Link { URL = att.Value, visited = false });
+                        this.manager.addLink(new Link { URL = att.Value, visited = false });
                         manager.articles++;
                     }
                     else if (att.Value.Contains("/wiki/")) //interne wiki links
                     {
-                        this.manager.links.Add(new Link { URL = "https://en.wikipedia.org"+att.Value, visited = false });
+                        this.manager.addLink(new Link { URL = "https://en.wikipedia.org"+att.Value, visited = false });
                         manager.articles++;
                     }
                 }

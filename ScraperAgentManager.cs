@@ -15,6 +15,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.DataVisualization.Charting;
 using WikiScraper.models;
+using WikiScraper.utilites;
 
 namespace WikiScraper
 {
@@ -22,13 +23,19 @@ namespace WikiScraper
     {
 
         CancellationTokenSource ts;
-        public Dictionary<string, int> dict = new Dictionary<string, int>();
+        private Structures structures = new Structures();
+        private Dictionary<string, int> dict = new Dictionary<string, int>();
 
-        public List<Link> links = new List<Link>();
+        private List<Link> links = new List<Link>();
 
         public int articles = 1;
 
         public string allText = "";
+
+        public void addLink(Link link)
+        {
+            this.links.Add(link);
+        }
 
         private void updateMessage()
         {
@@ -43,7 +50,6 @@ namespace WikiScraper
             Link link = new Link();
 
             link.URL = textBox1.Text;
-            link.Depth = articles;
             link.visited = false;
 
             links.Add(link);
@@ -74,20 +80,13 @@ namespace WikiScraper
                                 Task.Delay(millis).ContinueWith(t => {
                                     MethodInvoker update = delegate
                                     {
-                                        dict = this.frequencies(allText);
+                                        dict = this.structures.frequencies(allText);
                                         setGUI();
                                     };
                                     crawler.Start(ts.Token, l, numericUpDown1.Value);
                                     BeginInvoke(update);
                                 });
 
-
-                                /*
-                                Task t = Task.Delay(millis);
-                                t.ContinueWith(task =>
-                                {
-                                    crawler.Start(ts.Token, l, numericUpDown1.Value);
-                                });*/
                             }
                             else if(millis<0)
                             {
@@ -112,15 +111,6 @@ namespace WikiScraper
                 
         }
 
-        private Dictionary<string, int> frequencies(string text)
-        {
-            Dictionary<string, int> count =
-                text.Split(' ')
-                    .GroupBy(s => s)
-                    .ToDictionary(g => g.Key, g => g.Count());
-            var items = from item in count orderby item.Value descending select item;
-            return items.ToDictionary(pair => pair.Key, pair => pair.Value);
-        }
 
         private void setGUI()
         {
@@ -146,6 +136,7 @@ namespace WikiScraper
             series.Points.DataBindXY(shortKeys, shortened);
             chart1.Series.Add(series);
             dict.Clear();*/
+            richTextBox2.Clear();
             int num = 0;
             foreach (Link l in links)
             {
