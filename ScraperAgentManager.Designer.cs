@@ -2,7 +2,7 @@
 
 namespace WikiScraper
 {
-    partial class ScraperAgentGUI
+    partial class ScraperAgentManager
     {
         /// <summary>
         /// Required designer variable.

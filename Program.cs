@@ -16,7 +16,7 @@ namespace WikiScraper
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new ScraperAgentGUI());
+            Application.Run(new ScraperAgentManager());
         }
     }
 }

@@ -15,77 +15,64 @@ namespace WikiScraper
     class Crawler
     {
 
-        private ScraperAgentGUI scraper;
+        private ScraperAgentManager scraper;
         //public List<Link> getLinksAfterCrawling;
 
-        public Crawler(ScraperAgentGUI scraper)
+        public Crawler(ScraperAgentManager scraper)
         {
             this.scraper = scraper;
         }
 
-        public void Start(CancellationToken token, Link link, decimal depth)
+        public void Start(CancellationToken token, Link link, decimal articleLimit)
         {
             
             UriBuilder ub = new UriBuilder(link.URL);
 
             HtmlWeb hweb = new HtmlWeb();
-            hweb.UserAgent = "uldahl";
+            hweb.UserAgent = "uldahlalex";
             HtmlDocument doc = hweb.Load(ub.Uri.ToString());
 
             foreach (HtmlNode linkHere in doc.DocumentNode.SelectNodes("//a[@href]") )
             {
-                if (scraper.iteration < (int)depth)
+                if (scraper.articles < (int)articleLimit)
                 {
                     HtmlAttribute att = linkHere.Attributes["href"];
-                    Console.WriteLine(att.Value);
-                    if ((att.Value.Contains("http://") || att.Value.Contains("https://")) && att.Value.Contains("wiki")) //evt lav kun dansk wiki
+                    if ((att.Value.Contains("http://") || att.Value.Contains("https://")) && att.Value.Contains("en.wikikedia")) 
                     {
-                        this.scraper.links.Add(new Link { URL = att.Value, Depth = 1, visited = false });
-                        scraper.iteration++;
+                        this.scraper.links.Add(new Link { URL = att.Value, visited = false });
+                        scraper.articles++;
                     }
                     else if (att.Value.Contains("/wiki/")) //interne wiki links
                     {
-                        this.scraper.links.Add(new Link { URL = "https://en.wikipedia.org"+att.Value, Depth = 1, visited = false });
-                        scraper.iteration++;
+                        this.scraper.links.Add(new Link { URL = "https://en.wikipedia.org"+att.Value, visited = false });
+                        scraper.articles++;
                     }
-                    
                 }
-
             }
 
+            //DeEntitize replaces known entities by characters
             var exp = HtmlEntity.DeEntitize(doc.DocumentNode.InnerText);
 
-            Regex r = new Regex(@"\s+");
+            //Regularexpressions are used for tasks such as eliminating excess whitespace and special characters
+            var expFiltered = Regex.Replace(exp, @"[^\w\d\s]", "");
+            Regex space = new Regex(@"\s+");
             var sentences = exp.Replace(",\r\n", ", ").Split(new String[]
             {
                     "\r\n"
             }, StringSplitOptions.RemoveEmptyEntries);
-            string text = string.Join("\r\n", sentences.Select(s => r.Replace(s, " ").Trim()));
-            //Console.WriteLine(text);
-            scraper.allText = scraper.allText + text.ToLower();
+            string text = string.Join("\r\n", sentences.Select(s => space.Replace(s, " ").Trim()));
+            
+            //All words should be lower case, such that two identical words dont register as different
+            text = text.ToLower();
+
+            scraper.allText = scraper.allText + " " + text;
+            
             link.visited=true;
-            /*
-            var dict = this.frequencies(text);
-            foreach (var item in dict)
-            {
-                Console.WriteLine(item.Key);
-                Console.WriteLine(item.Value);
-            }*/
-            //this.getLinksAfterCrawling = links;
-            //return dict;
+
         }
 
 
 
-        private Dictionary<string, int> frequencies(string text)
-        {
-            Dictionary<string, int> count =
-                text.Split(' ')
-                    .GroupBy(s => s)
-                    .ToDictionary(g => g.Key, g => g.Count());
-            var items = from item in count orderby item.Value descending select item;
-            return items.ToDictionary(pair => pair.Key, pair => pair.Value);
-        }
 
     }
 }

@@ -18,7 +18,7 @@ using WikiScraper.models;
 
 namespace WikiScraper
 {
-    public partial class ScraperAgentGUI : Form
+    public partial class ScraperAgentManager : Form
     {
 
         CancellationTokenSource ts;
@@ -26,7 +26,7 @@ namespace WikiScraper
 
         public List<Link> links = new List<Link>();
 
-        public int iteration = 1;
+        public int articles = 1;
 
         public string allText = "";
 
@@ -39,11 +39,11 @@ namespace WikiScraper
         {
             updateMessage();
            
-            iteration++;
+            articles++;
             Link link = new Link();
 
             link.URL = textBox1.Text;
-            link.Depth = iteration;
+            link.Depth = articles;
             link.visited = false;
 
             links.Add(link);
@@ -56,18 +56,15 @@ namespace WikiScraper
                     try
                     {
                         decimal threads = numericUpDown2.Value;
-                        int crawlers = (int)threads;
 
-                        if (crawlers == 0)
+                        if ((int)threads == 0)
                         {
                             throw new Exception();
                         }
-                        for (int i = 0; i < crawlers; i++)
+                        for (int i = 0; i < (int)threads; i++)
                         {
 
                             var crawler = new Crawler(this);
-
-
 
                             DateTime when = DateTime.Parse("26/05/2020 12:27:45");
                             Console.WriteLine(when);
@@ -167,7 +164,7 @@ namespace WikiScraper
         }
 
 
-        public ScraperAgentGUI()
+        public ScraperAgentManager()
         {
             InitializeComponent();
             Prepare();
