@@ -37,6 +37,8 @@ namespace WikiScraper
 
         public void Prepare()
         {
+            
+
             updateMessage();
 
             articles++;
@@ -49,10 +51,8 @@ namespace WikiScraper
             links.Add(link);
 
             ts = new CancellationTokenSource();
-            foreach (Link l in links) //pt registrerer den ikke den ever-forøgende mængde af links - den tager blot de som er til stede pt, og scraper disse. Det er derfor, at når man trykker "start" vil man begynde at scrape nye sider
-            {
-                if (l.visited != true)
-                {
+            
+
                     try
                     {
                         decimal threads = numericUpDown2.Value;
@@ -61,51 +61,66 @@ namespace WikiScraper
                         {
                             throw new Exception();
                         }
+                        DateTime when = dateTimePicker1.Value;
+                        DateTime now = DateTime.Now;
+                        TimeSpan span = when - now;
+
+                        var crawler = new Crawler(this);
+
+
+                        int millis = Convert.ToInt32(span.TotalMilliseconds);
+                        if (millis > 0)
+                        {
+                            MethodInvoker update = delegate
+                            {
+                                dict = this.frequencies(allText);
+                                setGUI();
+                            };
                         for (int i = 0; i < (int)threads; i++)
                         {
-                            var crawler = new Crawler(this);
-                            DateTime when = dateTimePicker1.Value;
-                            DateTime now = DateTime.Now;
-                            TimeSpan span = when - now;
-
-                            int millis = Convert.ToInt32(span.TotalMilliseconds);
-                            if (millis > 0)
+                            Task.Delay(millis).ContinueWith(t =>
                             {
-                                Task.Delay(millis).ContinueWith(t => {
-                                    MethodInvoker update = delegate
+                                foreach (Link l in links) //pt registrerer den ikke den ever-forøgende mængde af links - den tager blot de som er til stede pt, og scraper disse. Det er derfor, at når man trykker "start" vil man begynde at scrape nye sider
                                     {
-                                        dict = this.frequencies(allText);
-                                        setGUI();
-                                    };
+                                    crawler.helloWorld();
                                     crawler.Start(ts.Token, l, numericUpDown1.Value);
-                                    BeginInvoke(update);
-                                });
+                                }
 
-
-                                /*
-                                Task t = Task.Delay(millis);
-                                t.ContinueWith(task =>
-                                {
-                                    crawler.Start(ts.Token, l, numericUpDown1.Value);
-                                });*/
-                            }
-                            else if(millis<0)
-                            {
-                                Task t = Task.Run(() =>
-                                {
-                                    crawler.Start(ts.Token, l, numericUpDown1.Value);
-                                    Console.WriteLine("hello world");
-                                });
-                            }
+                            });
                         }
+                        BeginInvoke(update);
+
+                        /*
+                        Task t = Task.Delay(millis);
+                        t.ContinueWith(task =>
+                        {
+                            crawler.Start(ts.Token, l, numericUpDown1.Value);
+                        });*/
+                    }
+                    else if (millis < 0)
+                        {
+                        for (int i = 0; i < (int)threads; i++)
+                        {
+
+                                foreach (Link l in links) //pt registrerer den ikke den ever-forøgende mængde af links - den tager blot de som er til stede pt, og scraper disse. Det er derfor, at når man trykker "start" vil man begynde at scrape nye sider
+                                {
+                                    crawler.helloWorld();
+                                    crawler.Start(ts.Token, l, numericUpDown1.Value);
+                                }
+
+                           
+                        }
+                    }
+
+
                     }
                     catch (Exception ex)
                     {
                         return;
                     }
-                }
+                
 
-            }
+            
             
             
            
