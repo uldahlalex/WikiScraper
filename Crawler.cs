@@ -15,12 +15,11 @@ namespace WikiScraper
     class Crawler
     {
 
-        private ScraperAgentManager scraper;
-        //public List<Link> getLinksAfterCrawling;
+        private ScraperAgentManager manager;
 
         public Crawler(ScraperAgentManager scraper)
         {
-            this.scraper = scraper;
+            this.manager = scraper;
         }
 
         public void helloWorld()
@@ -39,18 +38,18 @@ namespace WikiScraper
 
             foreach (HtmlNode linkHere in doc.DocumentNode.SelectNodes("//a[@href]") )
             {
-                if (scraper.articles < (int)articleLimit)
+                if (manager.articles < (int)articleLimit)
                 {
                     HtmlAttribute att = linkHere.Attributes["href"];
                     if ((att.Value.Contains("http://") || att.Value.Contains("https://")) && att.Value.Contains("en.wikikedia")) 
                     {
-                        this.scraper.links.Add(new Link { URL = att.Value, visited = false });
-                        scraper.articles++;
+                        this.manager.links.Add(new Link { URL = att.Value, visited = false });
+                        manager.articles++;
                     }
                     else if (att.Value.Contains("/wiki/")) //interne wiki links
                     {
-                        this.scraper.links.Add(new Link { URL = "https://en.wikipedia.org"+att.Value, visited = false });
-                        scraper.articles++;
+                        this.manager.links.Add(new Link { URL = "https://en.wikipedia.org"+att.Value, visited = false });
+                        manager.articles++;
                     }
                 }
             }
@@ -70,7 +69,7 @@ namespace WikiScraper
             //All words should be lower case, such that two identical words dont register as different
             text = text.ToLower();
 
-            scraper.allText = scraper.allText + " " + text;
+            manager.allText = manager.allText + " " + text;
             
             link.visited=true;
 
