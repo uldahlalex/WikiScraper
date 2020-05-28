@@ -186,7 +186,10 @@ namespace WikiScraper
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
                 System.IO.StreamWriter file = new System.IO.StreamWriter(saveFileDialog1.FileName.ToString());
-                file.WriteLine(richTextBox1.Text);
+                foreach (var entry in dict)
+                {
+                    file.WriteLine(entry.Key + "=" + entry.Value + ",\n");
+                }
                 file.Close();
             }
         }
