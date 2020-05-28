@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 
 namespace WikiScraper.models
 {
+    /// <summary>
+    /// Each href fetched from a website will be stored as a Link object
+    /// </summary>
     public class Link
     {
         public String URL { get; set; }

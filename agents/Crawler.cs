@@ -12,6 +12,10 @@ using WikiScraper.models;
 
 namespace WikiScraper
 {
+    /// <summary>
+    /// The crawler represents each "autonomous agent" in the system
+    /// The main goal of each crawler is to fetch data to the manager from a given URL
+    /// </summary>
     class Crawler
     {
 
@@ -38,18 +42,18 @@ namespace WikiScraper
 
             foreach (HtmlNode linkHere in doc.DocumentNode.SelectNodes("//a[@href]") )
             {
-                if (manager.articles < (int)articleLimit)
+                if (manager.getNumberOfArticles() < (int)articleLimit)
                 {
                     HtmlAttribute att = linkHere.Attributes["href"];
                     if ((att.Value.Contains("http://") || att.Value.Contains("https://")) && att.Value.Contains("en.wikikedia")) 
                     {
                         this.manager.addLink(new Link { URL = att.Value, visited = false });
-                        manager.articles++;
+                        manager.incrementArticles();
                     }
                     else if (att.Value.Contains("/wiki/")) //interne wiki links
                     {
                         this.manager.addLink(new Link { URL = "https://en.wikipedia.org"+att.Value, visited = false });
-                        manager.articles++;
+                        manager.incrementArticles();
                     }
                 }
             }
@@ -69,7 +73,7 @@ namespace WikiScraper
             //All words should be lower case, such that two identical words dont register as different
             text = text.ToLower();
 
-            manager.allText = manager.allText + " " + text;
+            manager.addText(text);
             
             link.visited=true;
 

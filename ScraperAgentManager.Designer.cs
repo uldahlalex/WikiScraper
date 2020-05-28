@@ -34,9 +34,6 @@ namespace WikiScraper
     /// </summary>
     private void InitializeComponent()
     {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series3 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -53,7 +50,6 @@ namespace WikiScraper
             this.theCrawlerToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.theAuthorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label4 = new System.Windows.Forms.Label();
-            this.chart1 = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.menuStrip2 = new System.Windows.Forms.MenuStrip();
@@ -68,14 +64,12 @@ namespace WikiScraper
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.richTextBox3 = new System.Windows.Forms.RichTextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
             this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.miniToolStrip.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             this.menuStrip2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
             this.SuspendLayout();
@@ -223,22 +217,6 @@ namespace WikiScraper
             this.label4.Text = "All words sorted by frequency";
             this.label4.Click += new System.EventHandler(this.label4_Click);
             // 
-            // chart1
-            // 
-            chartArea3.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.chart1.Legends.Add(legend3);
-            this.chart1.Location = new System.Drawing.Point(10, 492);
-            this.chart1.Name = "chart1";
-            series3.ChartArea = "ChartArea1";
-            series3.Legend = "Legend1";
-            series3.Name = "Series1";
-            this.chart1.Series.Add(series3);
-            this.chart1.Size = new System.Drawing.Size(517, 249);
-            this.chart1.TabIndex = 9;
-            this.chart1.Text = "chart1";
-            // 
             // menuStrip1
             // 
             this.menuStrip1.AutoSize = false;
@@ -321,7 +299,7 @@ namespace WikiScraper
             this.richTextBox1.Margin = new System.Windows.Forms.Padding(2);
             this.richTextBox1.Name = "richTextBox1";
             this.richTextBox1.ReadOnly = true;
-            this.richTextBox1.Size = new System.Drawing.Size(238, 262);
+            this.richTextBox1.Size = new System.Drawing.Size(238, 529);
             this.richTextBox1.TabIndex = 16;
             this.richTextBox1.Text = "";
             this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
@@ -331,7 +309,7 @@ namespace WikiScraper
             this.richTextBox2.Location = new System.Drawing.Point(251, 212);
             this.richTextBox2.Margin = new System.Windows.Forms.Padding(2);
             this.richTextBox2.Name = "richTextBox2";
-            this.richTextBox2.Size = new System.Drawing.Size(276, 262);
+            this.richTextBox2.Size = new System.Drawing.Size(276, 529);
             this.richTextBox2.TabIndex = 17;
             this.richTextBox2.Text = "";
             this.richTextBox2.LinkClicked += new System.Windows.Forms.LinkClickedEventHandler(this.openLink);
@@ -343,7 +321,7 @@ namespace WikiScraper
             this.numericUpDown2.Size = new System.Drawing.Size(121, 20);
             this.numericUpDown2.TabIndex = 18;
             this.numericUpDown2.Value = new decimal(new int[] {
-            3,
+            2,
             0,
             0,
             0});
@@ -368,16 +346,6 @@ namespace WikiScraper
             this.label5.Text = "URLs visited in chronological order. Click to open";
             this.label5.Click += new System.EventHandler(this.label5_Click_1);
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(6, 476);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(193, 13);
-            this.label7.TabIndex = 21;
-            this.label7.Text = "Visual chart representation of top words";
-            this.label7.Click += new System.EventHandler(this.label7_Click);
-            // 
             // richTextBox3
             // 
             this.richTextBox3.BackColor = System.Drawing.Color.Black;
@@ -401,9 +369,9 @@ namespace WikiScraper
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(118, 134);
-            this.dateTimePicker1.Format = DateTimePickerFormat.Custom;
             this.dateTimePicker1.CustomFormat = "dd/MM/yyyy hh:mm:ss";
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePicker1.Location = new System.Drawing.Point(118, 134);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(158, 20);
             this.dateTimePicker1.TabIndex = 24;
@@ -416,6 +384,7 @@ namespace WikiScraper
             this.button2.TabIndex = 25;
             this.button2.Text = "Schedule run at";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.scheduleRun);
             // 
             // ScraperAgentManager
             // 
@@ -428,14 +397,12 @@ namespace WikiScraper
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.richTextBox3);
-            this.Controls.Add(this.label7);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.numericUpDown2);
             this.Controls.Add(this.richTextBox2);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.chart1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.webBrowser1);
@@ -452,7 +419,6 @@ namespace WikiScraper
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.miniToolStrip.ResumeLayout(false);
             this.miniToolStrip.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.chart1)).EndInit();
             this.menuStrip2.ResumeLayout(false);
             this.menuStrip2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
@@ -478,7 +444,6 @@ namespace WikiScraper
         private System.Windows.Forms.ToolStripMenuItem theCrawlerToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem theAuthorToolStripMenuItem;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.DataVisualization.Charting.Chart chart1;
         private System.Windows.Forms.MenuStrip miniToolStrip;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.MenuStrip menuStrip2;
@@ -489,7 +454,6 @@ namespace WikiScraper
         private System.Windows.Forms.NumericUpDown numericUpDown2;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.RichTextBox richTextBox3;
         private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem1;
         private System.Windows.Forms.Label label8;

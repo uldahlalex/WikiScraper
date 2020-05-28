@@ -6,11 +6,20 @@ using System.Threading.Tasks;
 
 namespace WikiScraper.utilites
 {
-    /*
-     * Class structures contains utilitarian methods and variables utilized by other components
-     */
+
+    /// <summary>
+    /// Class structures contains utilitarian methods and variables utilized by other components
+    /// </summary>
     public class Structures
     {
+
+        /// <summary>
+        /// The fetched text should be turned into a dictionary structure with
+        /// with WORDS = KEYS
+        /// and FREQUENCIES = VALUES
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
         public Dictionary<string, int> frequencies(string text)
         {
             Dictionary<string, int> count =

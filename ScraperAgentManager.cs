@@ -21,41 +21,51 @@ namespace WikiScraper
 {
     public partial class ScraperAgentManager : Form
     {
-
-        CancellationTokenSource ts;
+        #region INSTANCE VARIABLES
+        private CancellationTokenSource ts;
         private Structures structures = new Structures();
         private Dictionary<string, int> dict = new Dictionary<string, int>();
-
         private List<Link> links = new List<Link>();
+        private int articles = 1;
+        private string allText = "";
+        #endregion
 
-        public int articles = 1;
-
-        public string allText = "";
+        #region ASSISTING METHODS FOR MANAGER
+        public void addText(string add)
+        {
+            this.allText = this.allText + add;
+        }
 
         public void addLink(Link link)
         {
             this.links.Add(link);
         }
 
-        private void updateMessage()
+        public int getNumberOfArticles()
         {
-            richTextBox3.Text = "Currently working...";
+            return articles;
         }
 
-        public void Prepare()
+        public void incrementArticles()
+        {
+            this.articles++;
+        }
+        #endregion ASSISTING METHODS FOR MANAGER
+
+
+        /// <summary>
+        /// Manager core functionality
+        /// </summary>
+        /// <param name="scheduled: is the method supposed to run now or at a specific time"></param>
+        private void PrepareCrawling(Boolean scheduled)
         {
             updateMessage();
-
-            articles++;
             Link link = new Link();
-
             link.URL = textBox1.Text;
             link.visited = false;
-
             links.Add(link);
-
             ts = new CancellationTokenSource();
-            foreach (Link l in links) //pt registrerer den ikke den ever-forøgende mængde af links - den tager blot de som er til stede pt, og scraper disse. Det er derfor, at når man trykker "start" vil man begynde at scrape nye sider
+            foreach (Link l in links) 
             {
                 if (l.visited != true)
                 {
@@ -75,6 +85,10 @@ namespace WikiScraper
                             TimeSpan span = when - now;
 
                             int millis = Convert.ToInt32(span.TotalMilliseconds);
+                            if (scheduled == false)
+                            {
+                                millis = -1;
+                            }
                             if (millis > 0)
                             {
                                 Task.Delay(millis).ContinueWith(t => {
@@ -90,10 +104,14 @@ namespace WikiScraper
                             }
                             else if(millis<0)
                             {
-                                Task t = Task.Run(() =>
-                                {
+                                Task.Delay(0).ContinueWith(t => {
+                                    MethodInvoker update = delegate
+                                    {
+                                        dict = this.structures.frequencies(allText);
+                                        setGUI();
+                                    };
                                     crawler.Start(ts.Token, l, numericUpDown1.Value);
-                                    Console.WriteLine("hello world");
+                                    BeginInvoke(update);
                                 });
                             }
                         }
@@ -103,39 +121,21 @@ namespace WikiScraper
                         return;
                     }
                 }
-
             }
-            
-            
-           
-                
         }
 
-
+        /// <summary>
+        /// Graphical user-interface update gets invoked in the PrepareScraping() method
+        /// </summary>
         private void setGUI()
         {
-            //start off by clearing the GUI and then setting it
             richTextBox1.Clear();
 
             foreach (var item in dict)
             {
                 richTextBox1.AppendText(item.Value + "     " + item.Key + "\n");
             }
-            //setting the chart
-            /*int[] vals = new int[dict.Count];
-            dict.Values.CopyTo(vals, 0);
-            int[] shortened = new int[5];
-            Array.Copy(vals, shortened, shortened.Length);
 
-            String[] keys = new String[dict.Count];
-            dict.Keys.CopyTo(keys, 0);
-            String[] shortKeys = new String[5];
-            Array.Copy(keys, shortKeys, shortKeys.Length);
-
-            var series = new Series("Highest word frequencies");
-            series.Points.DataBindXY(shortKeys, shortened);
-            chart1.Series.Add(series);
-            dict.Clear();*/
             richTextBox2.Clear();
             int num = 0;
             foreach (Link l in links)
@@ -151,7 +151,6 @@ namespace WikiScraper
         public ScraperAgentManager()
         {
             InitializeComponent();
-            //Prepare();
             richTextBox3.Clear();
             richTextBox1.Clear();
             richTextBox2.Clear();
@@ -159,7 +158,10 @@ namespace WikiScraper
 
         }
 
-
+        private void updateMessage()
+        {
+            richTextBox3.Text = "Currently working...";
+        }
 
 
         #region GUI controls related methods
@@ -288,12 +290,12 @@ namespace WikiScraper
 
             textBox1.Clear();
         }
-        #endregion
+        
 
         private void button1_Click(object sender, EventArgs e)
         {
 
-            this.Prepare();
+            this.PrepareCrawling(false);
         }
 
         private void label6_Click(object sender, EventArgs e)
@@ -344,6 +346,17 @@ namespace WikiScraper
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+        #endregion
+
+        private void numericUpDown2_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void scheduleRun(object sender, EventArgs e)
+        {
+            this.PrepareCrawling(true);
         }
     }
 }
