@@ -147,7 +147,9 @@ namespace WikiScraper
 
         }
 
-
+        /// <summary>
+        /// Constructor for the manager class. This simply sets up an initializes
+        /// </summary>
         public ScraperAgentManager()
         {
             InitializeComponent();
@@ -166,6 +168,11 @@ namespace WikiScraper
 
         #region GUI controls related methods
 
+        /// <summary>
+        /// In the save as .csv menu tab, this functionality is contained
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void saveAsCSV(object sender, EventArgs e)
         {
             Console.WriteLine("saving");

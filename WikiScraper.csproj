@@ -57,16 +57,16 @@
   <ItemGroup>
     <Compile Include="agents\Crawler.cs" />
     <Compile Include="models\Link.cs" />
-    <Compile Include="ScraperAgentManager.cs">
+    <Compile Include="manager\ScraperAgentManager.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ScraperAgentManager.Designer.cs">
+    <Compile Include="manager\ScraperAgentManager.Designer.cs">
       <DependentUpon>ScraperAgentManager.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="utilites\Structures.cs" />
-    <EmbeddedResource Include="ScraperAgentManager.resx">
+    <EmbeddedResource Include="manager\ScraperAgentManager.resx">
       <DependentUpon>ScraperAgentManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
