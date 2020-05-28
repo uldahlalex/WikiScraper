@@ -188,7 +188,7 @@ namespace WikiScraper
                 System.IO.StreamWriter file = new System.IO.StreamWriter(saveFileDialog1.FileName.ToString());
                 foreach (var entry in dict)
                 {
-                    file.WriteLine(entry.Key + "=" + entry.Value + ",\n");
+                    file.WriteLine(entry.Key + "=" + entry.Value + ",");
                 }
                 file.Close();
             }
